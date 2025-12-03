@@ -25,9 +25,7 @@ const FormCadProduto = ({ adicionar_produto }) => {
   };
 
   return (
-    <
-      
-    >
+    <>
       <div id="divMensagem" role="alert" aria-live="assertive"></div>
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
 
@@ -36,26 +34,24 @@ const FormCadProduto = ({ adicionar_produto }) => {
           type="text"
           role="group"
           aria-label="Nome do produto listado"   
-              placererlaceholder="Nome do produto"
           value={input_nomeProduto}
           tabIndex={1}
           style={{ width: "80%" }}
           onChange={(e) => setInput_nomeProduto(e.target.value)}
         />
 
-        {/* Campo Valor */}
+        
         <input
           type="number"
           role="group"
-          aria-label="Valor do produto"
-          placeholder="Valor"
+          aria-label="Valor do produto listado"
           value={input_valorProduto}
           tabIndex={1}
           style={{ width: "80%" }}
           onChange={(e) => setInput_valorProduto(e.target.value)}
         />
 
-        {/* Botão Adicionar */}
+        
         <button
           tabIndex={1}
           onClick={() => handle_buttonClick_add_produto()}
