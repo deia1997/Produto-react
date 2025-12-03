@@ -1,50 +1,73 @@
 import { useState } from "react";
-import useTarefa from "../hooks/useTarefa";
+import useProduto from "../hooks/useProduto";
 
-const FormCadTarefa = ({adicionar_tarefa}) => {
-    
-    const {exibirMensagem} = useTarefa()
+const FormCadProduto = ({ adicionar_produto }) => {
 
-    const [input_tituloTarefa, setInput_tituloTarefa] = useState("")
-    
-    const handle_buttonClick_add_tarefa = () =>{
-    adicionar_tarefa(input_tituloTarefa)
-    setInput_tituloTarefa("")
-}
+  const [input_idProduto, setInput_idProduto] = useState("");
+  const [input_nomeProduto, setInput_nomeProduto] = useState("");
+  const [input_valorProduto, setInput_valorProduto] = useState("");
 
-return (
-<>
+  const { exibirMensagem } = useProduto();
 
+  const handle_buttonClick_add_produto = () => {
+    if (!input_idProduto || !input_nomeProduto || !input_valorProduto) {
+      exibirMensagem("red", "Preencha os campos!");
+      return;
+    }
 
-<div id="divMensagem" role="alert" aria-live="assertiv"></div>
+    adicionar_produto(input_idProduto, 
+    input_nomeProduto,
+    input_valorProduto);
 
-<div style={{display: "flex"}}>
+    setInput_idProduto("");
+    setInput_nomeProduto("");
+    setInput_valorProduto("");
+  };
 
-<input 
-type="text" 
-role="group" 
-aria-label="Título da tarefa" 
-style={{width: "80%"}}
-value={input_tituloTarefa}
-tabIndex={1}
-onChange={(campo) =>{
-setInput_tituloTarefa(campo.target.value)
-}}
-/>
+  return (
+    <
+      
+    >
+      <div id="divMensagem" role="alert" aria-live="assertive"></div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
 
-<button 
-tabIndex={1} 
-onClick={() => {handle_buttonClick_add_tarefa()}
-}
+        
+        <input
+          type="text"
+          role="group"
+          aria-label="Nome do produto listado"   
+              placererlaceholder="Nome do produto"
+          value={input_nomeProduto}
+          tabIndex={1}
+          style={{ width: "80%" }}
+          onChange={(e) => setInput_nomeProduto(e.target.value)}
+        />
 
->
-Adicionar Tarefa
-</button>
+        {/* Campo Valor */}
+        <input
+          type="number"
+          role="group"
+          aria-label="Valor do produto"
+          placeholder="Valor"
+          value={input_valorProduto}
+          tabIndex={1}
+          style={{ width: "80%" }}
+          onChange={(e) => setInput_valorProduto(e.target.value)}
+        />
 
-</div>
-</>
-)
+        {/* Botão Adicionar */}
+        <button
+          tabIndex={1}
+          onClick={() => handle_buttonClick_add_produto()}
+        >
+          Adicionar Produto
+        </button>
 
-}
+      </div>
+    </>
+  );
+};
 
-export default FormCadTarefa;
+export default FormCadProduto;
+
+          
