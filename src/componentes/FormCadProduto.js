@@ -1,4 +1,4 @@
-import { useState } from "react";
+Adicionarnar { useState } from "react";
 import useProduto from "../hooks/useProduto";
 
 const FormCadProduto = ({ adicionar_produto }) => {
@@ -51,7 +51,7 @@ const FormCadProduto = ({ adicionar_produto }) => {
         />
 
         <button tabIndex={1} onClick={handle_buttonClick_add_produto}>
-          Adicionar Produto
+    Produto adicionado
         </button>
 
       </div>
