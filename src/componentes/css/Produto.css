@@ -1,8 +1,8 @@
 .box{
-max-width: 500px;
-margin: 30px auto;
-padding: 30px;
-border: 2px solid darkblue;
+max-width: 400px;
+margin: 20px auto;
+padding: 20px;
+border: 5px solid black;
 text-align: center;
 }
 
@@ -19,7 +19,7 @@ display:  flex;
 }
 
 .botao-grid{
-border: 3px solid aqua;
+border: 5px solid blue;
 margin: 5px;
 cursor: pointer;
 
