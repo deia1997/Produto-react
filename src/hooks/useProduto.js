@@ -1,9 +1,7 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useProduto = () => {
-
   const [produto, setProduto] = useState({
     id: null,
     nome: "",
@@ -25,40 +23,39 @@ const useProduto = () => {
     divMensagem.textContent = msg;
   };
 
-  const adicionar_produto = (id, nome, valor) => {
+  // ADICIONAR PRODUTO (ID GERADO AUTOMATICAMENTE)
+  const adicionar_produto = (nome, valor) => {
     const novoProduto = {
-      id: Math.random(),
+      id: Math.random(),    // id automático
       nome: nome,
       valor: valor
     };
 
     const novaLista = [...listaProdutos, novoProduto];
-    setListaProprodutoovaLista);
+    setListaProdutos(novaLista);
     alert("O produto foi adicionado com sucesso!");
   };
-  
-    const excluir_produto = (id) => {
+
+  const excluir_produto = (id) => {
     const novaLista = listaProdutos.filter((p) => p.id !== id);
     setListaProdutos(novaLista);
-    alert ("O produto foi excluído  sucesso!");
+    alert("O produto foi excluído com sucesso!");
   };
 
   const navigate = useNavigate();
+
   const exibir_detalhes_produto = (id) => {
- const produto = listaProdutos.find((p) => p.id === id);
+    const produto = listaProdutos.find((p) => p.id === id);
     navigate("/produtoDetalhes", { state: produto });
   };
 
   const alterar_produto = (produto_editado) => {
-    const novaLista = listaProdutos.map((p) => {
-      if (p.id === produto_editado.id) {
-        return produto_editado;
-      } else {
-        return p;
-      }
-    });
+    const novaLista = listaProdutos.map((p) =>
+      p.id === produto_editado.id ? produto_editado : p
+    );
+
     setListaProdutos(novaLista);
-    alert("O produto foi alteradoado com sucesso!");
+    alert("O produto foi alterado com sucesso!");
   };
 
   return {
