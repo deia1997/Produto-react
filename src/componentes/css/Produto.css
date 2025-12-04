@@ -6,7 +6,7 @@ border: 5px solid black;
 text-align: center;
 }
 
-.tarefa-box{
+.produto -box{
 background-color: lightcyan;
 display: flex;
 justify-content: space-between;
