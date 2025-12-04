@@ -26,7 +26,7 @@ const TelaProduto = () => {
 
         {listaProdutos.length === 0 ? (
 
-          <p>Não há produtos cadastrado.</p>
+          <p>Não há produtos cadastrado no momento.</p>
         ) : (
           listaProdutos.map((produto) => (
             <div
