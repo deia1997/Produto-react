@@ -35,8 +35,7 @@ const TelaProduto = () => {
     };
 
     setListaProdutos([...listaProdutos, novoProduto]);
-
-    setProduto({ nome: "", valor: "" }); // limpar inputs
+    setProduto({ nome: "", valor: "" });
   };
 
   const abrirDetalhes = (item) => {
@@ -47,15 +46,15 @@ const TelaProduto = () => {
     <div style={{ padding: "20px" }}>
       <h2>Cadastro de Produto</h2>
 
-      {/* FORMULÁRIO */}
-      <div style={{ marginBottom: "20px" }}>
+      {/* Inputs lado a lado */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <input
           type="text"
           name="nome"
-          placeholder="Nome do produto"
+          placeholder="Nome"
           value={produto.nome}
           onChange={handleChange}
-          style={{ padding: "8px", width: "200px", marginRight: "10px" }}
+          style={{ padding: "8px" }}
         />
 
         <input
@@ -64,7 +63,7 @@ const TelaProduto = () => {
           placeholder="Valor"
           value={produto.valor}
           onChange={handleChange}
-          style={{ padding: "8px", width: "120px", marginRight: "10px" }}
+          style={{ padding: "8px" }}
         />
 
         <button onClick={adicionarProduto} style={{ padding: "8px 16px" }}>
@@ -74,10 +73,9 @@ const TelaProduto = () => {
 
       <h3>Lista de Produtos</h3>
 
-      {/* TABELA EM GRID (lado a lado) */}
       <table
         border="1"
-        cellPadding="10"
+        cellPadding="8"
         style={{ borderCollapse: "collapse", width: "100%" }}
       >
         <thead>
@@ -91,12 +89,11 @@ const TelaProduto = () => {
         <tbody>
           {listaProdutos.map((item) => (
             <tr key={item.id}>
+              {/* ❗ Retirado o ID da tabela */}
               <td>{item.nome}</td>
               <td>R$ {item.valor}</td>
               <td>
-                <button onClick={() => abrirDetalhes(item)}>
-                  Detalhes
-                </button>
+                <button onClick={() => abrirDetalhes(item)}>Detalhes</button>
               </td>
             </tr>
           ))}
