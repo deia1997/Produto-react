@@ -1,83 +1,111 @@
-import useProduto from "../hooks/useProduto";
-import "./css/Produto.css"; 
-import FormCadProduto from "./FormCadProduto";
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TelaProduto = () => {
-  const {
-    listaProdutos,
-    adicionar_produto,
-    excluir_produto,
-    exibir_detalhes_produto
-    
-  } = useProduto();
+  const navigate = useNavigate();
+
+  const [listaProdutos, setListaProdutos] = useState(() => {
+    const listaStorage = localStorage.getItem("listaProdutos");
+    return listaStorage ? JSON.parse(listaStorage) : [];
+  });
+
+  const [produto, setProduto] = useState({
+    nome: "",
+    valor: ""
+  });
+
+  useEffect(() => {
+    localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+  }, [listaProdutos]);
+
+  const handleChange = (e) => {
+    setProduto({ ...produto, [e.target.name]: e.target.value });
+  };
+
+  const adicionarProduto = () => {
+    if (produto.nome.trim() === "" || produto.valor.trim() === "") {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    const novoProduto = {
+      id: Date.now(),
+      nome: produto.nome,
+      valor: produto.valor
+    };
+
+    setListaProdutos([...listaProdutos, novoProduto]);
+
+    setProduto({ nome: "", valor: "" }); // limpar inputs
+  };
+
+  const abrirDetalhes = (item) => {
+    navigate("/produtoDetalhes", { state: item });
+  };
 
   return (
-    <>
-      <h1 style={{ textAlign: "center" }} tabIndex={1}>
-        Minha lista de Produtos
-      </h1>
+    <div style={{ padding: "20px" }}>
+      <h2>Cadastro de Produto</h2>
 
+      {/* FORMULÁRIO */}
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Nome do produto"
+          value={produto.nome}
+          onChange={handleChange}
+          style={{ padding: "8px", width: "200px", marginRight: "10px" }}
+        />
 
-      <div className="box">
-        <div id="divMensagem" role="alert" aria-live="assertive"></div>
+        <input
+          type="number"
+          name="valor"
+          placeholder="Valor"
+          value={produto.valor}
+          onChange={handleChange}
+          style={{ padding: "8px", width: "120px", marginRight: "10px" }}
+        />
 
-        <FormCadProduto adicionar_produto={adicionar_produto} />
-
-        {listaProdutos.length === 0 ? (
-
-          <p>Não há produtos cadastrado no momento.</p>
-        ) : (
-          listaProdutos.map((produto) => (
-            <div
-              key={produto.id}
-              tabIndex={1}
-              className="produto-box"
-              style={{ borderLeft: "10px solid pink" }}
-              role="group"
-              aria-label={`Produto ${produto.nome}`}
-            >
-
-              <h1 tabIndex={2}>{produto.nome}</h1>
-              <p tabIndex={2}>ID: {produto.id}</p>
-              <p tabIndex={2}>Valor: R$ {produto.valor}</p>
-              <div className="grid-botoes" role="group" aria-label="ações">
-                
-              <button
-                  className="botao-grid"
-                  role="group"
-                  aria-label="Excluir produto cadastrado"
-                  tabIndex={2}
-                  onClick={() => excluir_produto(produto.id)}
-                >
-                  Excluir
-                </button>
-
-
-
-                <button
-                  className="botao-grid"
-                  tabIndex={2}
-                  role="group"
-                  aria-label="Exibir detalhes do produto listado"
-                  onClick={() => exibir_detalhes_produto(produto.id)}
-                >
-                  Exibir Detalhes
-                </button>
-              </div>
-
-
-            </div>
-          ))
-        )}
-
-
-
+        <button onClick={adicionarProduto} style={{ padding: "8px 16px" }}>
+          Adicionar
+        </button>
       </div>
-    </>
+
+      <h3>Lista de Produtos</h3>
+
+      {/* TABELA EM GRID (lado a lado) */}
+      <table
+        border="1"
+        cellPadding="10"
+        style={{ borderCollapse: "collapse", width: "100%" }}
+      >
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {listaProdutos.map((item) => (
+            <tr key={item.id}>
+              <td>{item.nome}</td>
+              <td>R$ {item.valor}</td>
+              <td>
+                <button onClick={() => abrirDetalhes(item)}>
+                  Detalhes
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+    </div>
   );
 };
 
 export default TelaProduto;
 
-                          
