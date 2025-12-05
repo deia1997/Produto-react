@@ -7,42 +7,42 @@
   text-align: center;
 }
 
-.produto-box {
-  background-color: lightcyan;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 25px;
-}
-
-.grid-botoes {
-  display: flex;
-  gap: 10px;
-}
-
-.botao-grid {
-  border: 5px solid deeppink;
-  margin: 5px;
-  cursor: pointer;
-  padding: 6px 12px;
-}
-
 .linha {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid black;
+  padding: 10px;
+  border: 3px solid deeppink !important;
+  margin-top: 10px;
+  background-color: lightcyan;
 }
 
 .coluna {
   flex: 1;
   text-align: center;
-  font-weight: bold;
+  font-size: 18px;
 }
 
 .coluna-acao {
   flex: 1;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.botao-grid,
+.coluna-acao button {
+  border: 5px solid deeppink !important;
+  background-color: white;
+  cursor: pointer;
+  padding: 8px 14px;
+  font-size: 16px;
+  color: black;
+  border-radius: 6px;
+}
+
+.botao-grid:hover,
+.coluna-acao button:hover {
+  background-color: deeppink !important;
+  color: white;
 }
