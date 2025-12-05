@@ -7,35 +7,46 @@
   text-align: center;
 }
 
-.linha {
+.tabela-header {
+  background-color: lightcyan;
+  border: 3px solid deeppink;
+  padding: 10px;
+  margin-top: 25px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.produto-box {
+  background-color: lightcyan;
+  border: 3px solid deeppink;
+  margin-top: 10px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border: 3px solid deeppink;
-  margin-top: 10px;
-  background-color: lightcyan;
 }
 
-.coluna {
+.coluna-nome,
+.coluna-valor {
+  font-size: 14px;
+  font-weight: bold;
   flex: 1;
-  font-size: 18px;
-  text-align: center;
+  text-align: left;
 }
 
 .coluna-acao {
   display: flex;
-  justify-content: center;
   gap: 6px;
 }
 
 .coluna-acao button {
-  border: 3px solid deeppink;
+  border: 2px solid deeppink;
   background-color: white;
   cursor: pointer;
-  padding: 4px 8px;
-  font-size: 14px;
-  border-radius: 6px;
+  padding: 2px 4px;
+  font-size: 10px;
+  border-radius: 4px;
   white-space: nowrap;
 }
 
