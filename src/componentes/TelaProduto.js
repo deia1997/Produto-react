@@ -1,6 +1,5 @@
-import React from "react";
 import useProduto from "../hooks/useProduto";
-import "./css/Produto.css";
+import "./css/Produto.css"; 
 import FormCadProduto from "./FormCadProduto";
 
 const TelaProduto = () => {
@@ -18,37 +17,32 @@ const TelaProduto = () => {
       </h1>
 
       <div className="box">
-        {/* mensagem (se você usar) */}
-        <div id="divMensagem" role="alert" aria-live="assertive"></div>
 
-        {/* usar seu componente de formulário (mantém campos um embaixo do outro) */}
+        {/* Formulário continua um abaixo do outro */}
         <FormCadProduto adicionar_produto={adicionar_produto} />
 
-        {/* Se não houver produtos */}
+        {/* Lista formatada lado a lado */}
         {listaProdutos.length === 0 ? (
           <p style={{ marginTop: "20px" }}>Não há produtos cadastrado no momento.</p>
         ) : (
           <div className="lista-produtos" style={{ marginTop: "20px" }}>
-            {/* Cabeçalho simples */}
-            <div className="produto-row header" aria-hidden="true">
-              <div className="produto-info cabeçalho-nome">Nome</div>
-              <div className="produto-info cabeçalho-valor">Valor</div>
-              <div className="produto-actions cabeçalho-acoes">Ações</div>
+
+            {/* Cabeçalho */}
+            <div className="produto-row header">
+              <div className="produto-info">Nome</div>
+              <div className="produto-info valor-col">Valor</div>
+              <div className="produto-actions">Ações</div>
             </div>
 
-            {/* Linhas dos produtos */}
+            {/* Produtos */}
             {listaProdutos.map((produto) => (
-              <div
-                key={produto.id}
-                className="produto-row"
-                role="group"
-                aria-label={`Produto ${produto.nome}`}
-              >
-                <div className="produto-info">
-                  <strong>{produto.nome}</strong>
-                </div>
+              <div key={produto.id} className="produto-row">
 
                 <div className="produto-info">
+                  {produto.nome}
+                </div>
+
+                <div className="produto-info valor-col">
                   R$ {produto.valor}
                 </div>
 
@@ -56,25 +50,23 @@ const TelaProduto = () => {
                   <button
                     className="botao-grid"
                     onClick={() => excluir_produto(produto.id)}
-                    aria-label={`Excluir ${produto.nome}`}
                   >
                     Excluir
                   </button>
 
-                  &nbsp;
-
                   <button
                     className="botao-grid"
                     onClick={() => exibir_detalhes_produto(produto.id)}
-                    aria-label={`Exibir detalhes de ${produto.nome}`}
                   >
-                    Detalhes
+                    Exibir detalhes
                   </button>
                 </div>
+
               </div>
             ))}
           </div>
         )}
+
       </div>
     </>
   );
