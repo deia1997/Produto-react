@@ -38,7 +38,7 @@ const TelaProduto = () => {
               <div className="linha" key={produto.id}>
                 
                 <div className="coluna">
-                  {produto.nome}
+                {produto.nome}
                 </div>
 
                 <div className="coluna">
