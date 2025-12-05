@@ -40,10 +40,10 @@ const TelaProdutoDetalhes = () => {
           <h2 tabIndex={1}>ID: {produto.id}</h2>
         </div>
 
-        <div style={{ textAlign: "left", padding: "5px" }}>
+        <div style={{ textAlign: "left", padding: "4px" }}>
           <h2 tabIndex={1}>
-            Nome: &nbsp;
-            <input
+           Nome: &nbsp;
+          <input
               type="text"
               size={50}
               role="group"
@@ -55,7 +55,7 @@ const TelaProdutoDetalhes = () => {
         </div>
 
 
-        <div style={{ textAlign: "left", padding: "5px" }}>
+        <div style={{ textAlign: "left", padding: "4px" }}>
           <h2 tabIndex={1}>
             Valor: &nbsp;
             <input
@@ -73,6 +73,7 @@ const TelaProdutoDetalhes = () => {
           onClick={() => {
             handle_buttonClick_alterar();
           }}
+          color: green;
         >
           alterar
         </button>
@@ -82,6 +83,7 @@ const TelaProdutoDetalhes = () => {
           onClick={() => {
             handle_buttonClick_voltar();
           }}
+          color: red
         >
           voltar
         </button>
