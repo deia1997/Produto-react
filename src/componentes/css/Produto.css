@@ -12,37 +12,34 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 3px solid deeppink !important;
+  border: 3px solid deeppink;
   margin-top: 10px;
   background-color: lightcyan;
 }
 
 .coluna {
   flex: 1;
-  text-align: center;
   font-size: 18px;
+  text-align: center;
 }
 
 .coluna-acao {
-  flex: 1;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 6px;
 }
 
-.botao-grid,
 .coluna-acao button {
-  border: 5px solid deeppink !important;
+  border: 3px solid deeppink;
   background-color: white;
   cursor: pointer;
-  padding: 8px 14px;
-  font-size: 16px;
-  color: black;
+  padding: 4px 8px;
+  font-size: 14px;
   border-radius: 6px;
+  white-space: nowrap;
 }
 
-.botao-grid:hover,
 .coluna-acao button:hover {
-  background-color: deeppink !important;
+  background-color: deeppink;
   color: white;
 }
