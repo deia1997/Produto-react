@@ -47,11 +47,11 @@ const TelaProduto = () => {
 
                 <div className="coluna-acao">
                   <button onClick={() => excluir_produto(produto.id)}>
-                    Excluir
+                   Excluir
                   </button>
 
                   <button onClick={() => exibir_detalhes_produto(produto.id)}>
-                    Exibir detalhes
+                  Detalhes
                   </button>
                 </div>
 
