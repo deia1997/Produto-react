@@ -1,108 +1,83 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import useProduto from "../hooks/useProduto";
+import "./css/Produto.css";
+import FormCadProduto from "./FormCadProduto";
 
 const TelaProduto = () => {
-  const navigate = useNavigate();
-
-  const [listaProdutos, setListaProdutos] = useState(() => {
-    const listaStorage = localStorage.getItem("listaProdutos");
-    return listaStorage ? JSON.parse(listaStorage) : [];
-  });
-
-  const [produto, setProduto] = useState({
-    nome: "",
-    valor: ""
-  });
-
-  useEffect(() => {
-    localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-  }, [listaProdutos]);
-
-  const handleChange = (e) => {
-    setProduto({ ...produto, [e.target.name]: e.target.value });
-  };
-
-  const adicionarProduto = () => {
-    if (produto.nome.trim() === "" || produto.valor.trim() === "") {
-      alert("Preencha todos os campos!");
-      return;
-    }
-
-    const novoProduto = {
-      id: Date.now(),
-      nome: produto.nome,
-      valor: produto.valor
-    };
-
-    setListaProdutos([...listaProdutos, novoProduto]);
-    setProduto({ nome: "", valor: "" });
-  };
-
-  const abrirDetalhes = (item) => {
-    navigate("/produtoDetalhes", { state: item });
-  };
+  const {
+    listaProdutos,
+    adicionar_produto,
+    excluir_produto,
+    exibir_detalhes_produto
+  } = useProduto();
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Cadastro de Produto</h2>
+    <>
+      <h1 style={{ textAlign: "center" }} tabIndex={1}>
+        Minha lista de Produtos cadastrados
+      </h1>
 
-      {/* Inputs lado a lado */}
-      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-        <input
-          type="text"
-          name="nome"
-          placeholder="Nome"
-          value={produto.nome}
-          onChange={handleChange}
-          style={{ padding: "8px" }}
-        />
+      <div className="box">
+        {/* mensagem (se você usar) */}
+        <div id="divMensagem" role="alert" aria-live="assertive"></div>
 
-        <input
-          type="number"
-          name="valor"
-          placeholder="Valor"
-          value={produto.valor}
-          onChange={handleChange}
-          style={{ padding: "8px" }}
-        />
+        {/* usar seu componente de formulário (mantém campos um embaixo do outro) */}
+        <FormCadProduto adicionar_produto={adicionar_produto} />
 
-        <button onClick={adicionarProduto} style={{ padding: "8px 16px" }}>
-          Adicionar
-        </button>
+        {/* Se não houver produtos */}
+        {listaProdutos.length === 0 ? (
+          <p style={{ marginTop: "20px" }}>Não há produtos cadastrado no momento.</p>
+        ) : (
+          <div className="lista-produtos" style={{ marginTop: "20px" }}>
+            {/* Cabeçalho simples */}
+            <div className="produto-row header" aria-hidden="true">
+              <div className="produto-info cabeçalho-nome">Nome</div>
+              <div className="produto-info cabeçalho-valor">Valor</div>
+              <div className="produto-actions cabeçalho-acoes">Ações</div>
+            </div>
+
+            {/* Linhas dos produtos */}
+            {listaProdutos.map((produto) => (
+              <div
+                key={produto.id}
+                className="produto-row"
+                role="group"
+                aria-label={`Produto ${produto.nome}`}
+              >
+                <div className="produto-info">
+                  <strong>{produto.nome}</strong>
+                </div>
+
+                <div className="produto-info">
+                  R$ {produto.valor}
+                </div>
+
+                <div className="produto-actions">
+                  <button
+                    className="botao-grid"
+                    onClick={() => excluir_produto(produto.id)}
+                    aria-label={`Excluir ${produto.nome}`}
+                  >
+                    Excluir
+                  </button>
+
+                  &nbsp;
+
+                  <button
+                    className="botao-grid"
+                    onClick={() => exibir_detalhes_produto(produto.id)}
+                    aria-label={`Exibir detalhes de ${produto.nome}`}
+                  >
+                    Detalhes
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-
-      <h3>Lista de Produtos</h3>
-
-      <table
-        border="1"
-        cellPadding="8"
-        style={{ borderCollapse: "collapse", width: "100%" }}
-      >
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Valor</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {listaProdutos.map((item) => (
-            <tr key={item.id}>
-              {/* ❗ Retirado o ID da tabela */}
-              <td>{item.nome}</td>
-              <td>R$ {item.valor}</td>
-              <td>
-                <button onClick={() => abrirDetalhes(item)}>Detalhes</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-    </div>
+    </>
   );
 };
 
 export default TelaProduto;
-
