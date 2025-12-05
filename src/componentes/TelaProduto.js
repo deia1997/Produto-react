@@ -13,57 +13,51 @@ const TelaProduto = () => {
   return (
     <>
       <h1 style={{ textAlign: "center" }} tabIndex={1}>
-        Minha lista de Produtos cadastrados
+        Minha lista de produtos cadastrados
       </h1>
 
       <div className="box">
 
-        {/* Formulário continua um abaixo do outro */}
+        {/* Formulário (continua igual) */}
         <FormCadProduto adicionar_produto={adicionar_produto} />
 
-        {/* Lista formatada lado a lado */}
         {listaProdutos.length === 0 ? (
-          <p style={{ marginTop: "20px" }}>Não há produtos cadastrado no momento.</p>
+          <p style={{ marginTop: "20px" }}>Não há produtos cadastrados no momento.</p>
         ) : (
-          <div className="lista-produtos" style={{ marginTop: "20px" }}>
+          <div style={{ marginTop: "30px" }}>
 
             {/* Cabeçalho */}
-            <div className="produto-row header">
-              <div className="produto-info">Nome</div>
-              <div className="produto-info valor-col">Valor</div>
-              <div className="produto-actions">Ações</div>
+            <div className="linha">
+              <div className="coluna"><strong>Nome</strong></div>
+              <div className="coluna"><strong>Valor</strong></div>
+              <div className="coluna-acao"><strong>Ações</strong></div>
             </div>
 
-            {/* Produtos */}
+            {/* Lista */}
             {listaProdutos.map((produto) => (
-              <div key={produto.id} className="produto-row">
-
-                <div className="produto-info">
+              <div className="linha" key={produto.id}>
+                
+                <div className="coluna">
                   {produto.nome}
                 </div>
 
-                <div className="produto-info valor-col">
+                <div className="coluna">
                   R$ {produto.valor}
                 </div>
 
-                <div className="produto-actions">
-                  <button
-                    className="botao-grid"
-                    onClick={() => excluir_produto(produto.id)}
-                  >
+                <div className="coluna-acao">
+                  <button onClick={() => excluir_produto(produto.id)}>
                     Excluir
                   </button>
 
-                  <button
-                    className="botao-grid"
-                    onClick={() => exibir_detalhes_produto(produto.id)}
-                  >
+                  <button onClick={() => exibir_detalhes_produto(produto.id)}>
                     Exibir detalhes
                   </button>
                 </div>
 
               </div>
             ))}
+
           </div>
         )}
 
@@ -73,3 +67,4 @@ const TelaProduto = () => {
 };
 
 export default TelaProduto;
+
