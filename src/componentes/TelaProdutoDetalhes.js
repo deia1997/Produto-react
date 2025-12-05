@@ -11,15 +11,12 @@ const TelaProdutoDetalhes = () => {
   const [input_nome, setInput_nome] = useState(produto.nome);
   const [input_valor, setInput_valor] = useState(produto.valor);
 
-
   const handle_buttonClick_alterar = () => {
     const produto_editado = {
       ...produto,
-
       nome: input_nome,
       valor: input_valor
     };
-
 
     alterar_produto(produto_editado);
     navigate("/");
@@ -42,8 +39,8 @@ const TelaProdutoDetalhes = () => {
 
         <div style={{ textAlign: "left", padding: "4px" }}>
           <h2 tabIndex={1}>
-           Nome: &nbsp;
-          <input
+            Nome: &nbsp;
+            <input
               type="text"
               size={50}
               role="group"
@@ -53,7 +50,6 @@ const TelaProdutoDetalhes = () => {
             />
           </h2>
         </div>
-
 
         <div style={{ textAlign: "left", padding: "4px" }}>
           <h2 tabIndex={1}>
@@ -70,30 +66,33 @@ const TelaProdutoDetalhes = () => {
         </div>
 
         <button
-          onClick={() => {
-            handle_buttonClick_alterar();
+          onClick={handle_buttonClick_alterar}
+          style={{
+            border: "3px solid deeppink",
+            padding: "5px 10px",
+            marginRight: "10px",
+            cursor: "pointer",
+            background: "white"
           }}
-          color: green;
         >
           alterar
         </button>
-        &nbsp;
 
         <button
-          onClick={() => {
-            handle_buttonClick_voltar();
+          onClick={handle_buttonClick_voltar}
+          style={{
+            border: "3px solid deeppink",
+            padding: "5px 10px",
+            cursor: "pointer",
+            background: "white"
           }}
-          color: red
         >
           voltar
         </button>
-
-
-
       </div>
     </>
   );
 };
 
 export default TelaProdutoDetalhes;
-
+            
