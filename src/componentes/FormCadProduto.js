@@ -1,4 +1,4 @@
-Adicionarnar { useState } from "react";
+import { useState } from "react";
 import useProduto from "../hooks/useProduto";
 
 const FormCadProduto = ({ adicionar_produto }) => {
